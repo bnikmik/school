@@ -24,7 +24,7 @@ public class StudentService {
     }
 
     public Student getStudent(Long studentId) {
-        return studentRepository.getReferenceById(studentId);
+        return studentRepository.findById(studentId).orElse(null);
     }
 
     public Student updateStudent(Student student) {
@@ -33,7 +33,7 @@ public class StudentService {
     }
 
     public Student deleteStudent(Long studentId) {
-        Student student = studentRepository.getReferenceById(studentId);
+        Student student = studentRepository.findById(studentId).orElse(null);
         studentRepository.deleteById(studentId);
         return student;
     }
