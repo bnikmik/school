@@ -24,7 +24,7 @@ public class HouseController {
 
     @GetMapping("/faculty/{facultyId}")
     public ResponseEntity<Faculty> getFaculty(@PathVariable Long facultyId) {
-        Faculty faculty = houseService.getFaculty(facultyId);
+        Faculty faculty = houseService.findFaculty(facultyId);
         if (faculty == null) {
             return ResponseEntity.notFound().build();
         }

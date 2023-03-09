@@ -24,8 +24,8 @@ public class HouseService {
         return faculty;
     }
 
-    public Faculty getFaculty(Long facultyId) {
-        return facultyRepository.getReferenceById(facultyId);
+    public Faculty findFaculty(Long facultyId) {
+        return facultyRepository.findById(facultyId).orElse(null);
     }
 
     public Faculty updateFaculty(Faculty faculty) {
@@ -34,7 +34,7 @@ public class HouseService {
     }
 
     public Faculty deleteFaculty(Long facultyId) {
-        Faculty faculty = facultyRepository.getReferenceById(facultyId);
+        Faculty faculty = facultyRepository.findById(facultyId).orElse(null);
         facultyRepository.deleteById(facultyId);
         return faculty;
     }
