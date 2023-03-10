@@ -29,9 +29,7 @@ public class StudentService {
 
     public StudentDTO createStudent(StudentDTO student) {
         student.setId(null);
-        Student tmpStudent = mappingUtils.mapFromDTOtoStudent(student);
-        tmpStudent.setFaculty(facultyRepository.findById(student.getFacultyId()).orElse(null));
-        studentRepository.save(tmpStudent);
+        studentRepository.save(mappingUtils.mapFromDTOtoStudent(student));
         return student;
     }
 

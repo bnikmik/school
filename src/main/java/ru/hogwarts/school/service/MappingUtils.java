@@ -10,6 +10,11 @@ import ru.hogwarts.school.repository.FacultyRepository;
 @Service
 public class MappingUtils {
     private FacultyRepository facultyRepository;
+
+    public MappingUtils(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
+    }
+
     public FacultyDTO mapFromFacultyToDTO(Faculty faculty) {
         FacultyDTO dto = new FacultyDTO();
         dto.setId(faculty.getId());
@@ -40,6 +45,7 @@ public class MappingUtils {
         student.setId(dto.getId());
         student.setName(dto.getName());
         student.setAge(dto.getAge());
+        student.setFaculty(facultyRepository.findById(dto.getFacultyId()).orElse(null));
         return student;
     }
 }
