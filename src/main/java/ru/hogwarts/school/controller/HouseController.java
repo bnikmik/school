@@ -2,6 +2,8 @@ package ru.hogwarts.school.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.dto.FacultyDTO;
+import ru.hogwarts.school.dto.StudentDTO;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.HouseService;
 
@@ -17,14 +19,14 @@ public class HouseController {
     }
 
     @PostMapping("/faculty")
-    public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
-        Faculty createdFaculty = houseService.createFaculty(faculty);
+    public ResponseEntity<FacultyDTO> createFaculty(@RequestBody FacultyDTO faculty) {
+        FacultyDTO createdFaculty = houseService.createFaculty(faculty);
         return ResponseEntity.ok(createdFaculty);
     }
 
     @GetMapping("/faculty/{facultyId}")
-    public ResponseEntity<Faculty> getFaculty(@PathVariable Long facultyId) {
-        Faculty faculty = houseService.findFaculty(facultyId);
+    public ResponseEntity<FacultyDTO> getFaculty(@PathVariable Long facultyId) {
+        FacultyDTO faculty = houseService.findFaculty(facultyId);
         if (faculty == null) {
             return ResponseEntity.notFound().build();
         }
@@ -32,14 +34,14 @@ public class HouseController {
     }
 
     @PutMapping("/faculty")
-    public ResponseEntity<Faculty> updateFaculty(@RequestBody Faculty faculty) {
-        Faculty updatedFaculty = houseService.updateFaculty(faculty);
+    public ResponseEntity<FacultyDTO> updateFaculty(@RequestBody FacultyDTO faculty) {
+        FacultyDTO updatedFaculty = houseService.updateFaculty(faculty);
         return ResponseEntity.ok(updatedFaculty);
     }
 
     @DeleteMapping("/faculty/{facultyId}")
-    public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long facultyId) {
-        Faculty faculty = houseService.deleteFaculty(facultyId);
+    public ResponseEntity<FacultyDTO> deleteFaculty(@PathVariable Long facultyId) {
+        FacultyDTO faculty = houseService.deleteFaculty(facultyId);
         if (faculty == null) {
             return ResponseEntity.notFound().build();
         }
@@ -47,7 +49,19 @@ public class HouseController {
     }
 
     @GetMapping("/faculties")
-    public ResponseEntity<Collection<Faculty>> getAllStudentsByAge(@RequestParam String color) {
-        return ResponseEntity.ok(houseService.findFacultiesByColor(color));
+    public ResponseEntity<Collection<FacultyDTO>> findAllFaculties(@RequestParam(required = false) String color,
+                                                                   @RequestParam(required = false) String name) {
+        if (color != null) {
+            return ResponseEntity.ok(houseService.findFacultiesByColor(color));
+        }
+        if (name != null) {
+            return ResponseEntity.ok(houseService.findFacultyByName(name));
+        }
+        return ResponseEntity.ok(houseService.findAllFaculties());
+    }
+
+    @GetMapping("/faculty/students")
+    public ResponseEntity<Collection<StudentDTO>> getStudentsByFacultyId(Long facultyId) {
+        return ResponseEntity.ok(houseService.getStudentsByFacultyId(facultyId));
     }
 }
