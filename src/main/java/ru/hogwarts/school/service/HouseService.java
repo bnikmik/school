@@ -7,7 +7,6 @@ import ru.hogwarts.school.dto.StudentDTO;
 import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.repository.StudentRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 public class HouseService {
 
     private final FacultyRepository facultyRepository;
-
     private final StudentRepository studentRepository;
     private final MappingUtils mappingUtils;
 

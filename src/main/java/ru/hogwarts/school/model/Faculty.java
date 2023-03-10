@@ -15,7 +15,4 @@ public class Faculty {
     private String color;
     @OneToMany
     private List<Student> students;
-
-    public Faculty() {
-    }
 }

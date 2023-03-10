@@ -14,7 +14,4 @@ public class Student {
     private int age;
     @ManyToOne(fetch = FetchType.LAZY)
     private Faculty faculty;
-
-    public Student() {
-    }
 }

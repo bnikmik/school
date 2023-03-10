@@ -5,9 +5,11 @@ import ru.hogwarts.school.dto.FacultyDTO;
 import ru.hogwarts.school.dto.StudentDTO;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.FacultyRepository;
 
 @Service
 public class MappingUtils {
+    private FacultyRepository facultyRepository;
     public FacultyDTO mapFromFacultyToDTO(Faculty faculty) {
         FacultyDTO dto = new FacultyDTO();
         dto.setId(faculty.getId());
