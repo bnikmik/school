@@ -95,7 +95,7 @@ public class StudentController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
-        headers.setContentLength(avatar.getData().length);
+        headers.setContentLength(avatar.getFileSize());
 
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
     }
