@@ -3,7 +3,6 @@ package ru.hogwarts.school.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Objects;
 @Entity
 @Data
 public class Student {
@@ -14,4 +13,5 @@ public class Student {
     private int age;
     @ManyToOne(fetch = FetchType.LAZY)
     private Faculty faculty;
+
 }

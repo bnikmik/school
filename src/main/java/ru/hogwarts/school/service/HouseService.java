@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+
 @Service
 public class HouseService {
-
     private final FacultyRepository facultyRepository;
     private final StudentRepository studentRepository;
     private final MappingUtils mappingUtils;
