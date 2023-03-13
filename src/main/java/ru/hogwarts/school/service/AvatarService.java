@@ -21,9 +21,8 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Service
 @Transactional
 public class AvatarService {
-    @Value("${students.avatar.dir.path}")
+    @Value("${path.for.files}")
     private String avatarsDir;
-
     private final StudentService studentService;
     private final AvatarRepository avatarRepository;
     private final MappingUtils mappingUtils;
@@ -37,7 +36,7 @@ public class AvatarService {
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
         Student student = mappingUtils.mapFromDTOtoStudent(studentService.findStudent(studentId));
 
-        Path filePath = Path.of(avatarsDir, studentId + "." + getExtension(Objects.requireNonNull(file.getOriginalFilename())));
+        Path filePath = Path.of(avatarsDir,"root",studentId + "." + getExtension(Objects.requireNonNull(file.getOriginalFilename())));
         Files.createDirectories(filePath.getParent());
         Files.deleteIfExists(filePath);
 
